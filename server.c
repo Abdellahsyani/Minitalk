@@ -12,11 +12,15 @@
 
 #include "minitalk.h"
 
-
 int	main()
 {
-	int	pid;
+	pid_t	pid;
 
 	pid = getpid();
-	printf("pid: %d\n", pid);
+	printf("pid server: %d\n", pid);
+	handle();
+	while (1)
+		pause();
+
+	return (0);
 }

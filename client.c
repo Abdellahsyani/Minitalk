@@ -50,6 +50,7 @@ void	ft_convert_to_binary(int pid, int c)
 			kill(pid, SIGUSR1);
 		else
 			kill(pid, SIGUSR2);
+		usleep(800);
 		i--;
 	}
 }

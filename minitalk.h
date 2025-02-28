@@ -10,11 +10,12 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#define MINITALK_H
-# ifndef MINITALK_H
+#ifndef MINITALK_H
+# define MINITALK_H
 
 #include <stdio.h>
-#include <
+#include <unistd.h>
+#include <signal.h>
 
 
 #endif

@@ -39,11 +39,11 @@ int	ft_atoi(char *str)
 
 void	ft_convert_to_binary(int pid, int c)
 {
-	unsigned int	i;
+	int	i;
 	unsigned int	bit;
 
 	i = 7;
-	while (i > 0)
+	while (1)
 	{
 		bit = ((c >> i) & 1);
 		if (bit == 0)
@@ -51,6 +51,8 @@ void	ft_convert_to_binary(int pid, int c)
 		else
 			kill(pid, SIGUSR2);
 		usleep(800);
+		if (i == 0)
+			break ;
 		i--;
 	}
 }

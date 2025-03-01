@@ -12,13 +12,13 @@
 
 #include "minitalk.h"
 
-void	ft_convert(unsigned int bit)
-{
-	unsigned char c;
-
-	c = (unsigned char)bit;
-	printf("%c", c);
-}
+/*void	ft_convert(unsigned int bit)*/
+/*{*/
+/*	unsigned char c;*/
+/**/
+/*	c = (unsigned char)bit;*/
+/*	printf("%c\n", c);*/
+/*}*/
 
 void sig_handler(int signal)
 {
@@ -31,7 +31,7 @@ void sig_handler(int signal)
 	bit_count++;
 	if (bit_count == 8)
 	{
-		ft_convert(bit_arr);
+		printf("%c\n", (unsigned char)bit_arr);
 		bit_arr = 0;   
 		bit_count = 0; 
 	}

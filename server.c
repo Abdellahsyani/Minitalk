@@ -14,28 +14,27 @@
 
 void	ft_convert(unsigned int bit)
 {
-	int	i;
-	static unsigned char	c;
+	unsigned char c;
 
-	i = 0;
-	while (i < 8)
-	{
-		c = ((bit << i) | 1);
-		i++;
-	}
-	printf("%c\n", c);
+	c = (unsigned char)bit;
+	printf("%c", c);
 }
 
-void	sig_handler(int	signal)
+void sig_handler(int signal)
 {
 	static unsigned int	bit_arr;
+	static int	bit_count;
 
-	if (signal == SIGUSR1)
-		bit_arr += 0;
-	if (signal == SIGUSR2)
-		bit_arr += 1;
-	if (bit_arr == 8)
+	bit_arr <<= 1;
+	if (signal == SIGUSR2)  
+		bit_arr |= 1;
+	bit_count++;
+	if (bit_count == 8)
+	{
 		ft_convert(bit_arr);
+		bit_arr = 0;   
+		bit_count = 0; 
+	}
 }
 
 int	main()

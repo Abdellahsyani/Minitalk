@@ -12,6 +12,12 @@
 
 #include "minitalk.h"
 
+/**
+ * ft_atoi _ the function that convert from string to number
+ * @str: the string that will converted
+ *
+ * return: the number that converted
+ */
 static int	ft_atoi(char *str)
 {
 	int			i;
@@ -37,6 +43,11 @@ static int	ft_atoi(char *str)
 	return (res * sign);
 }
 
+/**
+ * ft_convert_to_binary _ function to convert to binary
+ * @pid: the id of the server
+ * @c: charecter that will convert to binary
+ */
 static void	ft_convert_to_binary(int pid, int c)
 {
 	int	i;

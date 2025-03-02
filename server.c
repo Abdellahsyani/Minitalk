@@ -12,7 +12,9 @@
 
 #include "minitalk.h"
 
-
+/**
+ * sig_handler _ the function that handle signals
+ */
 static void sig_handler(int signal)
 {
 	static unsigned int	bit_arr;
@@ -30,7 +32,7 @@ static void sig_handler(int signal)
 	}
 }
 
-int	main()
+int	main(void)
 {
 	pid_t	pid;
 	struct	sigaction sa;

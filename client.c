@@ -12,7 +12,7 @@
 
 #include "minitalk.h"
 
-int	ft_atoi(char *str)
+static int	ft_atoi(char *str)
 {
 	int			i;
 	int			sign;
@@ -37,7 +37,7 @@ int	ft_atoi(char *str)
 	return (res * sign);
 }
 
-void	ft_convert_to_binary(int pid, int c)
+static void	ft_convert_to_binary(int pid, int c)
 {
 	int	i;
 	unsigned int	bit;

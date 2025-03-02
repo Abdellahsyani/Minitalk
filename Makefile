@@ -29,7 +29,7 @@ clean:
 	 make -C $(PF_DIR) clean
 fclean: clean
 	rm -f $(NAME) $(S_NAME)
-	 make -C $(PF_DIR) fclean
+	 make -C $(PF_DIR) clean
 
 re: fclean all
 

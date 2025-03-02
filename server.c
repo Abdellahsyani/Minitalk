@@ -13,7 +13,7 @@
 #include "minitalk.h"
 
 
-void sig_handler(int signal)
+static void sig_handler(int signal)
 {
 	static unsigned int	bit_arr;
 	static int	bit_count;
@@ -24,6 +24,7 @@ void sig_handler(int signal)
 	bit_count++;
 	if (bit_count == 8)
 	{
+		ft_printf("%c", bit_arr);
 		bit_arr = 0;   
 		bit_count = 0; 
 	}
@@ -35,12 +36,17 @@ int	main()
 	struct	sigaction sa;
 
 	sa.sa_handler = sig_handler;
+
+	sigemptyset(&sa.sa_mask);
+
+	sigaddset(&sa.sa_mask, SIGUSR1);
+	sigaddset(&sa.sa_mask, SIGUSR2);
+
 	pid = getpid();
 	printf("pid server: %d\n", pid);
 	sigaction(SIGUSR1, &sa, NULL);
 	sigaction(SIGUSR2, &sa, NULL);
 	while (1) 
 		pause();
-
 	return (0);
 }

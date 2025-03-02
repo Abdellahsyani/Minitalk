@@ -12,6 +12,26 @@
 
 #include "minitalk.h"
 
+static void	design(void)
+{
+	ft_printf("\033[1;94m");
+	ft_printf("\n");
+	ft_printf("   ██████ ███████ ██████  ██    ██ ███████ ██████   \n");
+	ft_printf("  ██      ██      ██   ██ ██    ██ ██      ██   ██  \n");
+	ft_printf("   █████  █████   ██████  ██    ██ █████   ██████   \n");
+	ft_printf("       ██ ██      ██   ██  ██  ██  ██      ██   ██  \n");
+	ft_printf("  ██████  ███████ ██   ██   ████   ███████ ██   ██  \n");
+	ft_printf("\033[0m\n");
+	ft_printf("\033[1;36m───────────────────────────────────\033[0m\n");
+	ft_printf("\033[1;92m\033[5m");
+	ft_printf("  ➤ Server is Running...\n");
+	ft_printf("\033[0m");
+	ft_printf("\033[1;93m");
+	ft_printf("  ➤ Server PID : %d\n", getpid());
+	ft_printf("\033[0m");
+	ft_printf("\033[1;36m───────────────────────────────────\033[0m\n");
+}
+
 /**
  * sig_handler _ the function that handle signals
  */
@@ -34,18 +54,13 @@ static void sig_handler(int signal)
 
 int	main(void)
 {
-	pid_t	pid;
 	struct	sigaction sa;
 
 	sa.sa_handler = sig_handler;
-
 	sigemptyset(&sa.sa_mask);
-
 	sigaddset(&sa.sa_mask, SIGUSR1);
 	sigaddset(&sa.sa_mask, SIGUSR2);
-
-	pid = getpid();
-	printf("pid server: %d\n", pid);
+	design();
 	sigaction(SIGUSR1, &sa, NULL);
 	sigaction(SIGUSR2, &sa, NULL);
 	while (1) 

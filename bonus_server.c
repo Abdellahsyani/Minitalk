@@ -12,7 +12,7 @@
 
 #include "minitalk.h"
 
-static void	design(void)
+static void	banner_design(void)
 {
 	ft_printf("\033[1;94m");
 	ft_printf("\n");
@@ -34,19 +34,28 @@ static void	design(void)
 
 /**
  * sig_handler _ the function that handle signals
- */
-static void sig_handler(int signal)
+ * @sig: the signal that will handled
+ * @info: a struct that let us catch the pid of the client
+ * @context: */
+static void	sig_handler(int sig, siginfo_t *info, void *context)
 {
 	static unsigned int	bit_arr;
 	static int	bit_count;
+	static	pid_t	client_pid;
+	(void)context;
 
+	if (bit_count == 0)
+		client_pid = info->si_pid;
 	bit_arr <<= 1;
-	if (signal == SIGUSR2)  
+	if (sig == SIGUSR2)  
 		bit_arr |= 1;
 	bit_count++;
 	if (bit_count == 8)
 	{
-		ft_printf("%c", bit_arr);
+		if (bit_arr == '\0')
+			kill(client_pid, SIGUSR1);
+		else
+			ft_printf("%c", bit_arr);
 		bit_arr = 0;   
 		bit_count = 0; 
 	}
@@ -56,11 +65,12 @@ int	main(void)
 {
 	struct	sigaction sa;
 
-	sa.sa_handler = sig_handler;
+	sa.sa_sigaction = sig_handler;
+	sa.sa_flags = SA_SIGINFO;
 	sigemptyset(&sa.sa_mask);
 	sigaddset(&sa.sa_mask, SIGUSR1);
 	sigaddset(&sa.sa_mask, SIGUSR2);
-	design();
+	banner_design();
 	sigaction(SIGUSR1, &sa, NULL);
 	sigaction(SIGUSR2, &sa, NULL);
 	while (1) 

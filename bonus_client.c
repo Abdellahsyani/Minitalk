@@ -68,6 +68,10 @@ static void	ft_convert_to_binary(int pid, int c)
 	}
 }
 
+/**
+ * parse_pid _ function to check pars of pid
+ * @av: the pid string
+ */
 void	parse_pid(char *av)
 {
 	int	i;
@@ -81,14 +85,32 @@ void	parse_pid(char *av)
 	}
 }
 
+/**
+ * print_message _ function to print a message
+ * @sig: the signal that we catch
+ */
+void	print_message(int sig)
+{
+	if (sig == SIGUSR1)
+	{
+		ft_printf("\033[1;92m\033[5m");
+		ft_printf("	✅ The message has been received successfully.");
+		ft_printf("\033[0m");
+	}
+	ft_printf("\n");
+}
+
 int	main(int ac, char **av)
 {
 	int	i;
 	int	pid;
+	struct sigaction sa;
 
 	if (ac != 3 || av[2][0] == '\0')
 		return (1);
 	i = 0;
+	sa.sa_handler = print_message;
+	sigaction(SIGUSR1, &sa, NULL);
 	parse_pid(av[1]);
 	pid = ft_atoi(av[1]);
 	while (av[2][i])

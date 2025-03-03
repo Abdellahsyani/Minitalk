@@ -12,7 +12,7 @@
 
 #include "minitalk.h"
 
-static void	design(void)
+static void	design(pid_t pid)
 {
 	ft_printf("\033[1;94m");
 	ft_printf("\n");
@@ -27,7 +27,7 @@ static void	design(void)
 	ft_printf("  ➤ Server is Running...\n");
 	ft_printf("\033[0m");
 	ft_printf("\033[1;93m");
-	ft_printf("  ➤ Server PID : %d\n", getpid());
+	ft_printf("  ➤ Server PID : %d\n", pid);
 	ft_printf("\033[0m");
 	ft_printf("\033[1;36m───────────────────────────────────\033[0m\n");
 }
@@ -58,12 +58,16 @@ static void sig_handler(int signal)
 int	main(void)
 {
 	struct	sigaction sa;
+	pid_t	pid;
 
+	pid = getpid();
+	if (pid == -1)
+		return (1);
 	sa.sa_handler = sig_handler;
 	sigemptyset(&sa.sa_mask);
 	sigaddset(&sa.sa_mask, SIGUSR1);
 	sigaddset(&sa.sa_mask, SIGUSR2);
-	design();
+	design(pid);
 	sigaction(SIGUSR1, &sa, NULL);
 	sigaction(SIGUSR2, &sa, NULL);
 	ft_printf("\n");

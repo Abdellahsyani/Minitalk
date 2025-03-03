@@ -102,8 +102,8 @@ void	print_message(int sig)
 
 int	main(int ac, char **av)
 {
-	int				i;
-	int				pid;
+	int					i;
+	int					pid;
 	struct sigaction	sa;
 
 	if (ac != 3 || av[2][0] == '\0')

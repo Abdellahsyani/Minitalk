@@ -40,14 +40,14 @@ static void	banner_design(void)
 static void	sig_handler(int sig, siginfo_t *info, void *context)
 {
 	static unsigned int	bit_arr;
-	static int		bit_count;
-	static	pid_t		client_pid;
-	(void)context;
+	static int			bit_count;
+	static pid_t		client_pid;
 
+	(void)context;
 	if (bit_count == 0)
 		client_pid = info->si_pid;
 	bit_arr <<= 1;
-	if (sig == SIGUSR2)  
+	if (sig == SIGUSR2)
 		bit_arr |= 1;
 	bit_count++;
 	if (bit_count == 8)
@@ -56,14 +56,14 @@ static void	sig_handler(int sig, siginfo_t *info, void *context)
 			kill(client_pid, SIGUSR1);
 		else
 			ft_printf("%c", bit_arr);
-		bit_arr = 0;   
-		bit_count = 0; 
+		bit_arr = 0;
+		bit_count = 0;
 	}
 }
 
 int	main(void)
 {
-	struct	sigaction	sa;
+	struct sigaction	sa;
 
 	sa.sa_sigaction = sig_handler;
 	sa.sa_flags = SA_SIGINFO;
@@ -73,7 +73,7 @@ int	main(void)
 	banner_design();
 	sigaction(SIGUSR1, &sa, NULL);
 	sigaction(SIGUSR2, &sa, NULL);
-	while (1) 
+	while (1)
 		pause();
 	return (0);
 }

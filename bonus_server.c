@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   server.c                                           :+:      :+:    :+:   */
+/*   bonus_server.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: asyani <asyani@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/26 15:52:03 by asyani            #+#    #+#             */
-/*   Updated: 2025/02/26 15:55:51 by asyani           ###   ########.fr       */
+/*   Created: 2025/03/03 07:38:42 by asyani            #+#    #+#             */
+/*   Updated: 2025/03/03 07:38:55 by asyani           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +46,7 @@ static void sig_handler(int signal)
 	bit_count++;
 	if (bit_count == 8)
 	{
-		if (bit_arr == '\0')
-			ft_printf("\n");
-		else
-			ft_printf("%c", bit_arr);
+		ft_printf("%c", bit_arr);
 		bit_arr = 0;   
 		bit_count = 0; 
 	}
@@ -66,7 +63,6 @@ int	main(void)
 	design();
 	sigaction(SIGUSR1, &sa, NULL);
 	sigaction(SIGUSR2, &sa, NULL);
-	ft_printf("\n");
 	while (1) 
 		pause();
 	return (0);

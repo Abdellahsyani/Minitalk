@@ -35,13 +35,13 @@ static void	design(pid_t pid)
 /**
  * sig_handler _ the function that handle signals
  */
-static void sig_handler(int signal)
+static void	sig_handler(int signal)
 {
 	static unsigned int	bit_arr;
-	static int	bit_count;
+	static int			bit_count;
 
 	bit_arr <<= 1;
-	if (signal == SIGUSR2)  
+	if (signal == SIGUSR2)
 		bit_arr |= 1;
 	bit_count++;
 	if (bit_count == 8)
@@ -50,15 +50,15 @@ static void sig_handler(int signal)
 			ft_printf("\n");
 		else
 			ft_printf("%c", bit_arr);
-		bit_arr = 0;   
-		bit_count = 0; 
+		bit_arr = 0;
+		bit_count = 0;
 	}
 }
 
 int	main(void)
 {
-	struct	sigaction sa;
-	pid_t	pid;
+	struct sigaction	sa;
+	pid_t				pid;
 
 	pid = getpid();
 	if (pid == -1)
@@ -71,7 +71,7 @@ int	main(void)
 	sigaction(SIGUSR1, &sa, NULL);
 	sigaction(SIGUSR2, &sa, NULL);
 	ft_printf("\n");
-	while (1) 
+	while (1)
 		pause();
 	return (0);
 }

@@ -20,8 +20,8 @@
  */
 static int	ft_atoi(char *str)
 {
-	int			i;
-	int			sign;
+	int	i;
+	int	sign;
 	int	res;
 
 	i = 0;
@@ -50,7 +50,7 @@ static int	ft_atoi(char *str)
  */
 static void	ft_convert_to_binary(int pid, int c)
 {
-	int	i;
+	int				i;
 	unsigned int	bit;
 
 	i = 7;

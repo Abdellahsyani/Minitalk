@@ -20,8 +20,8 @@
  */
 static int	ft_atoi(char *str)
 {
-	int			i;
-	int			sign;
+	int	i;
+	int	sign;
 	int	res;
 
 	i = 0;
@@ -50,7 +50,7 @@ static int	ft_atoi(char *str)
  */
 static void	ft_convert_to_binary(int pid, int c)
 {
-	int	i;
+	int				i;
 	unsigned int	bit;
 
 	i = 7;
@@ -102,9 +102,9 @@ void	print_message(int sig)
 
 int	main(int ac, char **av)
 {
-	int	i;
-	int	pid;
-	struct sigaction sa;
+	int				i;
+	int				pid;
+	struct sigaction	sa;
 
 	if (ac != 3 || av[2][0] == '\0')
 		return (1);

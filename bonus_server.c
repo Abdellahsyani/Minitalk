@@ -40,8 +40,8 @@ static void	banner_design(void)
 static void	sig_handler(int sig, siginfo_t *info, void *context)
 {
 	static unsigned int	bit_arr;
-	static int	bit_count;
-	static	pid_t	client_pid;
+	static int		bit_count;
+	static	pid_t		client_pid;
 	(void)context;
 
 	if (bit_count == 0)
@@ -63,7 +63,7 @@ static void	sig_handler(int sig, siginfo_t *info, void *context)
 
 int	main(void)
 {
-	struct	sigaction sa;
+	struct	sigaction	sa;
 
 	sa.sa_sigaction = sig_handler;
 	sa.sa_flags = SA_SIGINFO;

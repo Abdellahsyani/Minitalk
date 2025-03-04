@@ -44,8 +44,12 @@ static void	sig_handler(int sig, siginfo_t *info, void *context)
 	static pid_t		client_pid;
 
 	(void)context;
-	if (bit_count == 0)
+	if (client_pid != info->si_pid)
+	{
 		client_pid = info->si_pid;
+		bit_arr = 0;
+		bit_count = 0;
+	}
 	bit_arr <<= 1;
 	if (sig == SIGUSR2)
 		bit_arr |= 1;

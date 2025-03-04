@@ -46,10 +46,7 @@ static void	sig_handler(int signal)
 	bit_count++;
 	if (bit_count == 8)
 	{
-		if (bit_arr == '\0')
-			ft_printf("\n");
-		else
-			ft_printf("%c", bit_arr);
+		ft_printf("%c", bit_arr);
 		bit_arr = 0;
 		bit_count = 0;
 	}
@@ -61,8 +58,8 @@ int	main(void)
 	pid_t				pid;
 
 	pid = getpid();
-	if (pid == -1)
-		return (1);
+	/*if (pid == -1)*/
+	/*	return (1);*/
 	sa.sa_handler = sig_handler;
 	sigemptyset(&sa.sa_mask);
 	sigaddset(&sa.sa_mask, SIGUSR1);
@@ -70,7 +67,6 @@ int	main(void)
 	design(pid);
 	sigaction(SIGUSR1, &sa, NULL);
 	sigaction(SIGUSR2, &sa, NULL);
-	ft_printf("\n");
 	while (1)
 		pause();
 	return (0);

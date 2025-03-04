@@ -6,7 +6,6 @@ C_FLAG = -Wall -Wextra -Werror
 
 SRC = client.c
 S_SRC = server.c
-
 B_SRC = bonus_client.c
 BS_SRC = bonus_server.c
 
@@ -20,29 +19,36 @@ BS_OBJ = $(BS_SRC:.c=.o)
 
 all: $(NAME) $(S_NAME)
 
-$(NAME): $(OBJ)
-	$(CC) $(C_FLAG) $(OBJ) -L$(PF_DIR) -lftprintf -o $(NAME)
-
-$(S_NAME): $(S_OBJ)
-	$(CC) $(C_FLAG) $(S_OBJ) -L$(PF_DIR) -lftprintf -o $(S_NAME)
-
-bonus: $(B_OBJ) $(BS_OBJ)
-	$(CC) $(C_FLAG) $(B_OBJ) -L$(PF_DIR) -lftprintf -o $(NAME)
-	$(CC) $(C_FLAG) $(BS_OBJ) -L$(PF_DIR) -lftprintf -o $(S_NAME)
-
 $(LIB_PF):
 	make -C $(PF_DIR)
+
+$(NAME): $(OBJ) $(LIB_PF)
+	$(CC) $(C_FLAG) $(OBJ) -L$(PF_DIR) -lftprintf -o $(NAME)
+
+$(S_NAME): $(S_OBJ) $(LIB_PF)
+	$(CC) $(C_FLAG) $(S_OBJ) -L$(PF_DIR) -lftprintf -o $(S_NAME)
+
+bonus: .client_bonus .server_bonus
+
+.client_bonus: $(B_OBJ) $(LIB_PF)
+	$(CC) $(C_FLAG) $(B_OBJ) -L$(PF_DIR) -lftprintf -o $(NAME)
+	touch .client_bonus
+
+.server_bonus: $(BS_OBJ) $(LIB_PF)
+	$(CC) $(C_FLAG) $(BS_OBJ) -L$(PF_DIR) -lftprintf -o $(S_NAME)
+	touch .server_bonus
 
 %.o: %.c
 	$(CC) $(C_FLAG) -c $< -o $@
 
 clean:
 	rm -f $(OBJ) $(S_OBJ) $(B_OBJ) $(BS_OBJ)
+	rm -f .client_bonus .server_bonus
 	make -C $(PF_DIR) clean
 
 fclean: clean
 	rm -f $(NAME) $(S_NAME)
-	make -C $(PF_DIR) clean
+	make -C $(PF_DIR) fclean
 
 re: fclean all
 

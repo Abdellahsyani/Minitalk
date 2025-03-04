@@ -51,7 +51,7 @@ static int	ft_atoi(char *str)
 static void	ft_convert_to_binary(int pid, int c)
 {
 	int				i;
-	unsigned int	bit;
+	unsigned char	bit;
 
 	i = 7;
 	while (1)

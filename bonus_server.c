@@ -39,7 +39,7 @@ static void	banner_design(void)
  * @context: */
 static void	sig_handler(int sig, siginfo_t *info, void *context)
 {
-	static unsigned int	bit_arr;
+	static unsigned char	bit_arr;
 	static int			bit_count;
 	static pid_t		client_pid;
 

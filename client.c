@@ -51,7 +51,7 @@ static int	ft_atoi(char *str)
 static void	ft_convert_to_binary(int pid, int c)
 {
 	int				i;
-	unsigned int	bit;
+	unsigned char	bit;
 
 	i = 7;
 	while (1)
@@ -68,6 +68,10 @@ static void	ft_convert_to_binary(int pid, int c)
 	}
 }
 
+/**
+ * parse_pid _ the function that check that pid is valid
+ * @av: the pid that will be checked
+ */
 void	parse_pid(char *av)
 {
 	int	i;
@@ -91,6 +95,8 @@ int	main(int ac, char **av)
 	i = 0;
 	parse_pid(av[1]);
 	pid = ft_atoi(av[1]);
+	if (pid < 0)
+		return (1);
 	while (av[2][i])
 	{
 		ft_convert_to_binary(pid, av[2][i]);

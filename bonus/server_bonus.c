@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   bonus_server.c                                     :+:      :+:    :+:   */
+/*   server_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: asyani <asyani@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 07:38:42 by asyani            #+#    #+#             */
-/*   Updated: 2025/03/03 07:38:55 by asyani           ###   ########.fr       */
+/*   Updated: 2025/03/05 10:58:15 by asyani           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minitalk.h"
+#include "minitalk_bonus.h"
 
 static void	banner_design(void)
 {
@@ -36,12 +36,13 @@ static void	banner_design(void)
  * sig_handler _ the function that handle signals
  * @sig: the signal that will handled
  * @info: a struct that let us catch the pid of the client
- * @context: */
+ * @context: the cpu stat
+ * */
 static void	sig_handler(int sig, siginfo_t *info, void *context)
 {
 	static unsigned char	bit_arr;
-	static int			bit_count;
-	static pid_t		client_pid;
+	static int				bit_count;
+	static pid_t			client_pid;
 
 	(void)context;
 	if (client_pid != info->si_pid)

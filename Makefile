@@ -4,10 +4,10 @@ S_NAME = server
 CC = cc
 C_FLAG = -Wall -Wextra -Werror
 
-SRC = client.c
-S_SRC = server.c
-B_SRC = bonus_client.c
-BS_SRC = bonus_server.c
+SRC = mandatory/client.c
+S_SRC = mandatory/server.c
+B_SRC = bonus/client_bonus.c bonus/exit_failure.c
+BS_SRC = bonus/server_bonus.c bonus/exit_failure.c
 
 PF_DIR = ./ft_printf
 LIB_PF = $(PF_DIR)/libftprintf.a

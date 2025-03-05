@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   client.c                                           :+:      :+:    :+:   */
+/*   bonus_client.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: asyani <asyani@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/26 12:44:44 by asyani            #+#    #+#             */
-/*   Updated: 2025/02/26 13:26:21 by asyani           ###   ########.fr       */
+/*   Created: 2025/03/03 07:39:16 by asyani            #+#    #+#             */
+/*   Updated: 2025/03/03 07:39:28 by asyani           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minitalk.h"
+#include "minitalk_bonus.h"
 
 /**
  * ft_atoi _ the function that convert from string to number
@@ -20,9 +20,9 @@
  */
 static int	ft_atoi(char *str)
 {
-	int	i;
-	int	sign;
-	int	res;
+	int		i;
+	int		sign;
+	long	res;
 
 	i = 0;
 	sign = 1;
@@ -38,6 +38,8 @@ static int	ft_atoi(char *str)
 	while (str[i] >= '0' && str[i] <= '9')
 	{
 		res = res * 10 + (str[i] - '0');
+		if (res >= INT_MAX)
+			exit_failure("Invalid PID\n");
 		i++;
 	}
 	return (res * sign);
@@ -69,8 +71,8 @@ static void	ft_convert_to_binary(int pid, int c)
 }
 
 /**
- * parse_pid _ the function that check that pid is valid
- * @av: the pid that will be checked
+ * parse_pid _ function to check pars of pid
+ * @av: the pid string
  */
 void	parse_pid(char *av)
 {
@@ -85,14 +87,32 @@ void	parse_pid(char *av)
 	}
 }
 
+/**
+ * print_message _ function to print a message
+ * @sig: the signal that we catch
+ */
+void	print_message(int sig)
+{
+	if (sig == SIGUSR1)
+	{
+		ft_printf("\033[1;92m\033[5m");
+		ft_printf("	✅ The message has been received successfully.");
+		ft_printf("\033[0m");
+	}
+	ft_printf("\n");
+}
+
 int	main(int ac, char **av)
 {
-	int	i;
-	int	pid;
+	int					i;
+	int					pid;
+	struct sigaction	sa;
 
 	if (ac != 3 || av[2][0] == '\0')
 		return (1);
 	i = 0;
+	sa.sa_handler = print_message;
+	sigaction(SIGUSR1, &sa, NULL);
 	parse_pid(av[1]);
 	pid = ft_atoi(av[1]);
 	if (pid < 0)

@@ -38,8 +38,8 @@ static void	design(void)
 static void	sig_handler(int signal, siginfo_t *info, void *context)
 {
 	static unsigned char	bit_arr;
-	static int			bit_count;
-	static pid_t	client_pid;
+	static int				bit_count;
+	static pid_t			client_pid;
 
 	(void)context;
 	if (client_pid != info->si_pid)

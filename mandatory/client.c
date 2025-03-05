@@ -12,7 +12,6 @@
 
 #include "minitalk.h"
 
-
 /**
  * exit_failure _ function to exit error
  * @str: the string error
@@ -24,8 +23,9 @@ static void	exit_failure(char *str)
 	i = 0;
 	while (str[i])
 		i++;
+	ft_printf("\033[1;31m\033[5m");
 	write(2, "Error: ", 7);
-	write(2, str, 1);
+	write(2, str, i);
 	exit(1);
 }
 
@@ -39,7 +39,7 @@ static int	ft_atoi(char *str)
 {
 	int		i;
 	int		sign;
-	long			res;
+	long	res;
 
 	i = 0;
 	sign = 1;

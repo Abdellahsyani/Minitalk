@@ -23,7 +23,8 @@ void	exit_failure(char *str)
 	i = 0;
 	while (str[i])
 		i++;
+	ft_printf("\033[1;31m\033[5m");
 	write(2, "Error: ", 7);
-	write(2, str, 1);
+	write(2, str, i);
 	exit(1);
 }

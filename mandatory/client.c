@@ -114,7 +114,7 @@ int	main(int ac, char **av)
 	i = 0;
 	parse_pid(av[1]);
 	pid = ft_atoi(av[1]);
-	if (pid < 0)
+	if (pid <= 0)
 		return (1);
 	while (av[2][i])
 	{

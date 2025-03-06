@@ -115,7 +115,7 @@ int	main(int ac, char **av)
 	sigaction(SIGUSR1, &sa, NULL);
 	parse_pid(av[1]);
 	pid = ft_atoi(av[1]);
-	if (pid < 0)
+	if (pid <= 0)
 		return (1);
 	while (av[2][i])
 	{
